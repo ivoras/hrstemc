@@ -1,7 +1,9 @@
+#!/usr/bin/python
 
 rules = [r'^('+osnova+')('+nastavak+r')$' for osnova, nastavak in [e.strip().split(' ') for e in open('rules.txt', 'rt')]]
 
-print("""
+f = open('rules.c', 'wt')
+f.write("""
 #include <err.h>
 #include <pcre.h>
 
@@ -13,7 +15,10 @@ void hrstemc_init_rules() {
     """ % len(rules) )
 
 for i, r in enumerate(rules):
-    print("    rules[%d] = pcre_compile(\"%s\", 0, &error, &error_offset, NULL);" % (i, r))
-    print("    if (error != NULL) errx(1, \"%s\", error);")
+    f.write("    rules[%d] = pcre_compile(\"%s\", 0, &error, &error_offset, NULL);\n" % (i, r))
+    f.write("    if (error != NULL) errx(1, \"%s\", error);\n")
 
-print("""}""")
+f.write("}\n")
+f.close()
+
+

@@ -7,8 +7,7 @@ static pcre *rules[102];
 void hrstemc_init_rules() {
     const char *error;
     int error_offset;
-    
-    rules[0] = pcre_compile("^(.+(s|š)k)(ijima|ijega|ijemu|ijem|ijim|ijih|ijoj|ijeg|iji|ije|ija|oga|ome|omu|ima|og|om|im|ih|oj|i|e|o|a|u)$", 0, &error, &error_offset, NULL);
+        rules[0] = pcre_compile("^(.+(s|š)k)(ijima|ijega|ijemu|ijem|ijim|ijih|ijoj|ijeg|iji|ije|ija|oga|ome|omu|ima|og|om|im|ih|oj|i|e|o|a|u)$", 0, &error, &error_offset, NULL);
     if (error != NULL) errx(1, "%s", error);
     rules[1] = pcre_compile("^(.+(s|š)tv)(ima|om|o|a|u)$", 0, &error, &error_offset, NULL);
     if (error != NULL) errx(1, "%s", error);
