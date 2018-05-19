@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
 
 The main function is `hrstemc_korjenuj()` defined as:
 
-```
+```C
 char* hrstemc_korjenuj(char* lowercase_word);
 ```
 
@@ -42,4 +42,4 @@ The function always returns a `malloc()`-ed string which needs to be `free()`-d 
 
 ## Usage example for PostgreSQL
 
-See the `README.build` file in the `pgdict_hrstemc` directory.
+See the `README.build` file in the `pgdict_hrstemc` directory for build and usage instructions.
