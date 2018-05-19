@@ -100,3 +100,40 @@ void hrstemc_transformiraj(char **s) {
         }
     }
 }
+
+// Returns a malloc-ed string! The caller must free() it.
+char* hrstemc_korjenuj(char *s) {
+    int i;
+
+    for (i = 0; i < hrstemc_n_rules; i++) {
+        int pres;
+        int j;
+        const int max_vec = 12;
+        int pcre_vec[max_vec];
+        char *strmatch = NULL;
+
+        pres = pcre_exec(hrstemc_rules[i], hrstemc_rules_extra[i], s, strlen(s), 0, 0, pcre_vec, max_vec);
+        if (pres == PCRE_ERROR_NOMATCH)
+            continue;
+        if (pres < 0) {
+            errx(1, "PCRE error in hrstemc_korjenuj(): %d", pres);
+        }
+
+        if (pres != 3) {
+            errx(1, "hrstemc_korjenuj() unexpected result: %d", pres);
+        }
+
+        pcre_get_substring(s, pcre_vec, pres, 1, (const char **) &strmatch);
+        if (strlen(strmatch) == 0) {
+            pcre_free_substring(strmatch);
+            continue;
+        }
+
+        if (hrstemc_ima_samoglasnik(strmatch)) {
+            char *s2 = strdup(strmatch);
+            pcre_free_substring(strmatch);
+            return s2;
+        }
+    }
+    return strdup(s);
+}

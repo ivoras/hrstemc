@@ -17,4 +17,7 @@ int main(int argc, char **argv) {
     hrstemc_transformiraj(&s);
     printf("transformiraj: %s\n", s);
 
+    char *s2 = hrstemc_korjenuj(s);
+    printf("korjenuj: %s\n", s2);
+
 }
