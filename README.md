@@ -29,6 +29,7 @@ int main(int argc, char **argv) {
 
     char *s2 = hrstemc_korjenuj("tihim");
     printf("korjenuj: %s\n", s2);
+    free(s2);
 }
 ```
 
