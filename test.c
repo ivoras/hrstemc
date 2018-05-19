@@ -19,5 +19,4 @@ int main(int argc, char **argv) {
 
     char *s2 = hrstemc_korjenuj(s);
     printf("korjenuj: %s\n", s2);
-
 }

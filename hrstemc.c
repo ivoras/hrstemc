@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <pcre.h>
+
 #include "hrstemc.h"
 
 extern int hrstemc_n_transformations;
@@ -107,7 +108,6 @@ char* hrstemc_korjenuj(char *s) {
 
     for (i = 0; i < hrstemc_n_rules; i++) {
         int pres;
-        int j;
         const int max_vec = 12;
         int pcre_vec[max_vec];
         char *strmatch = NULL;

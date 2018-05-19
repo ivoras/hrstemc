@@ -52,6 +52,7 @@ dhrstemc_init(PG_FUNCTION_ARGS)
 	MemoryContextDeleteChildren(CurrentMemoryContext);
 
 	PG_RETURN_POINTER(sc);
+	hrstemc_init();
 }
 
 static TSLexeme *
@@ -78,7 +79,7 @@ is_stopword(char *word)
 static char *
 process_sufx(char *word)
 {
-	int i, wl;
+	int wl;
 	char *res, *stemmed;
 
 	wl = strlen(word);

@@ -11,6 +11,8 @@ int hrstemc_n_rules = %d;
 pcre *hrstemc_rules[%d];
 pcre_extra *hrstemc_rules_extra[%d];
 
+void hrstemc_init_rules(void);
+
 void hrstemc_init_rules() {
     const char *error;
     int error_offset;
