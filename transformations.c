@@ -1,7 +1,8 @@
 
 #include <err.h>
 
-static char *transformations[131][2] = {
+int hrstemc_n_transformations = 131;
+char *hrstemc_transformations[131][2] = {
     { "lozi", "loga" },
     { "lozima", "loga" },
     { "pjesi", "pjeh" },

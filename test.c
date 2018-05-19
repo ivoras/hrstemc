@@ -10,8 +10,11 @@ int main(int argc, char **argv) {
     printf("mora: %d\n", hrstemc_is_stopword("mora"));
     printf("krenuti: %d\n", hrstemc_is_stopword("krenuti"));
 
-    char *s = strdup("drvo");
+    char *s = strdup("drvojebe");
     hrstemc_istakni_slogotvorno_r(s);
     printf("r: %s %d\n", s, hrstemc_ima_samoglasnik(s));
+
+    hrstemc_transformiraj(&s);
+    printf("transformiraj: %s\n", s);
 
 }

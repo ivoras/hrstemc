@@ -6,8 +6,9 @@ f = open('transformations.c', 'wt')
 f.write("""
 #include <err.h>
 
-static char *transformations[%d][2] = {
-""" % len(transformations))
+int hrstemc_n_transformations = %d;
+char *hrstemc_transformations[%d][2] = {
+""" % (len(transformations), len(transformations)))
 
 for i, t in enumerate(transformations):
     f.write("""    { "%s", "%s" }""" % tuple(t))

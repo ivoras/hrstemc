@@ -5,6 +5,13 @@
 #include <pcre.h>
 #include "hrstemc.h"
 
+extern int hrstemc_n_transformations;
+extern char* hrstemc_transformations[][2];
+
+extern int hrstemc_n_rules;
+extern pcre *hrstemc_rules[];
+extern pcre_extra *hrstemc_rules_extra[];
+
 static char *stopwords[] = {
     "biti","jesam","budem","sam","jesi","budeš","si","jesmo","budemo","smo","jeste","budete","ste","jesu","budu","su","bih","bijah","bjeh","bijaše","bi","bje","bješe","bijasmo",
     "bismo","bjesmo","bijaste","biste","bjeste","bijahu","biste","bjeste","bijahu","bi","biše","bjehu","bješe","bio","bili","budimo","budite","bila","bilo","bile","ću","ćeš","će",
@@ -69,4 +76,27 @@ int hrstemc_ima_samoglasnik(char *s) {
 
     free(sdup);
     return 0;
+}
+
+int hrstemc_endswith(char *s, char *what) {
+    if (strlen(what) > strlen(s)) {
+        return 0;
+    }
+    if (strcmp(s+strlen(s)-strlen(what), what) == 0) {
+        return 1;
+    }
+    return 0;
+}
+
+void hrstemc_transformiraj(char **s) {
+    int i;
+
+    for (i = 0; i < hrstemc_n_transformations; i++) {
+        if (hrstemc_endswith(*s, hrstemc_transformations[i][0])) {
+            *s = realloc(*s, strlen(*s) + strlen(hrstemc_transformations[i][1]));
+            if (*s == NULL) errx(1, "Out of memory");
+            strcpy( (*s) + (strlen(*s) - strlen(hrstemc_transformations[i][0])), hrstemc_transformations[i][1]);
+            return;
+        }
+    }
 }
