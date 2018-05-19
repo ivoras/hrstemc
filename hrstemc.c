@@ -129,6 +129,7 @@ char* hrstemc_korjenuj(char *s) {
             pcre_free_substring(strmatch);
             return s2;
         }
+        pcre_free_substring(strmatch);
     }
     return strdup(s);
 }
