@@ -44,3 +44,7 @@ The function always returns a `malloc()`-ed string which needs to be `free()`-d 
 ## Usage example for PostgreSQL
 
 See the `README.build` file in the `pgdict_hrstemc` directory for build and usage instructions.
+
+## Endnotes
+
+There are several places in the code which could be optimized for better performance, e.g. searching for stopwords could be done as a binary search on a sorted list, transformation processing could be done with a fancy algorithm, etc. Patches welcome!
