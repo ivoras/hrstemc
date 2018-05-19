@@ -27,14 +27,7 @@ int main(int argc, char **argv) {
     printf("mora: %d\n", hrstemc_is_stopword("mora"));
     printf("krenuti: %d\n", hrstemc_is_stopword("krenuti"));
 
-    char *s = strdup("tihim");
-    hrstemc_istakni_slogotvorno_r(s);
-    printf("r: %s %d\n", s, hrstemc_ima_samoglasnik(s));
-
-    hrstemc_transformiraj(&s);
-    printf("transformiraj: %s\n", s);
-
-    char *s2 = hrstemc_korjenuj(s);
+    char *s2 = hrstemc_korjenuj("tihim");
     printf("korjenuj: %s\n", s2);
 }
 ```
