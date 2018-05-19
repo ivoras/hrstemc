@@ -21,19 +21,8 @@ static char *stopwords[] = {
     NULL
 };
 
-static pcre *re_slogotvorno_r;
-static pcre_extra *ree_slogotvorno_r;
-
 void hrstemc_init() {
-    const char *error;
-    int error_offset;
-
     hrstemc_init_rules();
-
-    re_slogotvorno_r = pcre_compile("(^|[^aeiou])r($|[^aeiou])", 0, &error, &error_offset, NULL);
-    if (error != NULL) errx(1, "%s", error);
-    ree_slogotvorno_r = pcre_study(re_slogotvorno_r, 0, &error);
-    if (error != NULL) errx(1, "%s", error);
 }
 
 int hrstemc_is_stopword(char *w) {
@@ -105,6 +94,12 @@ void hrstemc_transformiraj(char **s) {
 // Returns a malloc-ed string! The caller must free() it.
 char* hrstemc_korjenuj(char *s) {
     int i;
+
+    if (s == NULL)
+        errx(1, "hrstemc_korjenuj() got a NULL argument");
+
+    if (hrstemc_rules[0] == NULL)
+        hrstemc_init();
 
     for (i = 0; i < hrstemc_n_rules; i++) {
         int pres;

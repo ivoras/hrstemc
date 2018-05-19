@@ -83,6 +83,9 @@ process_sufx(char *word)
 	char *res, *stemmed;
 
 	wl = strlen(word);
+	if (wl < 2)
+		return pstrdup(word);
+
 #if PG_VERSION_NUM >= 90100
 	word = str_tolower(word, wl, DEFAULT_COLLATION_OID);
 #else
@@ -90,7 +93,7 @@ process_sufx(char *word)
 #endif
 
 	stemmed = hrstemc_korjenuj(word);
-	res = pstrdup(word);
+	res = pstrdup(stemmed);
 	free(stemmed);
 	return res;
 }
