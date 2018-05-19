@@ -101,14 +101,17 @@ void hrstemc_transformiraj(char **s) {
 // The main function of this library. Returnes a stemmed version of the given word.
 // The word must be given as a lowercase string.
 // Returns a malloc-ed string! The caller must free() it.
-char* hrstemc_korjenuj(char *s) {
+char* hrstemc_korjenuj(char *lowercase_word) {
     int i;
 
-    if (s == NULL)
+    if (lowercase_word == NULL)
         errx(1, "hrstemc_korjenuj() got a NULL argument");
 
     if (hrstemc_rules[0] == NULL)
         hrstemc_init();
+
+    char *s = strdup(lowercase_word);
+    hrstemc_transformiraj(&s);
 
     for (i = 0; i < hrstemc_n_rules; i++) {
         int pres;
@@ -136,9 +139,10 @@ char* hrstemc_korjenuj(char *s) {
         if (hrstemc_ima_samoglasnik(strmatch)) {
             char *s2 = strdup(strmatch);
             pcre_free_substring(strmatch);
+            free(s);
             return s2;
         }
         pcre_free_substring(strmatch);
     }
-    return strdup(s);
+    return s;
 }
