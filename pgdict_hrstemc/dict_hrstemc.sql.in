@@ -1,0 +1,24 @@
+SET search_path = public;
+
+CREATE OR REPLACE FUNCTION dhrstemc_init(internal)
+        RETURNS internal
+        AS 'MODULE_PATHNAME'
+        LANGUAGE 'c';
+
+CREATE OR REPLACE FUNCTION dhrstemc_lexize(internal, internal, internal, internal)
+        RETURNS internal
+        AS 'MODULE_PATHNAME'
+        LANGUAGE 'c'
+        WITH (isstrict);
+
+CREATE TEXT SEARCH TEMPLATE hrstemc_template (
+        LEXIZE = 'dhrstemc_lexize',
+	INIT   = 'dhrstemc_init'
+);
+
+CREATE TEXT SEARCH DICTIONARY hrstemc (
+	TEMPLATE = hrstemc_template
+);
+
+COMMENT ON TEXT SEARCH DICTIONARY hrstemc IS 'Dictionary for approximate Croatian stemming based on suffix rules';
+

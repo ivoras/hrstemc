@@ -1,0 +1,17 @@
+Croatian suffix-based stemmer for PostgreSQL
+============================================
+
+This module is a special case stemmer for the Croatian language, based on
+commonly used suffix rules. It may produce invalid roots, but this is deemed
+to be better than no stemming at all.
+
+The basic data set is in the hr.regex file, used by the genparser.py script
+to generate a standalone C code module. Unfortunately, the data set requires
+manual tweaking to not produce silly mistakes so the hr_regex_sufx.c file
+should not really be regenerated any more.
+
+
+-- by Ivan Voras, 2010.
+-- BSDL
+-- ivoras@gmail.com
+

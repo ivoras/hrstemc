@@ -1,0 +1,12 @@
+Adapted to PostgreSQL 9.1
+
+1) Copy dict_regex to postgresqlX.Y/contrib/dict_hrstemc, modify
+   postgresqlX.Y/contrib/Makefile to include dict_hrstemc
+2) Edit Makefile for -I -L
+3) Run global PostgreSQL ./configure (optionally with --prefix=/usr/local)
+4) Make the module with gmake
+5) Make install with gmake
+6) Find where dict_hrstemc.sql is installed and run it on the
+   database as a superuser
+7) Install "dict_hrstemc" as an PostgreSQL extension
+

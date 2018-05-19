@@ -1,0 +1,6 @@
+# dict_hrstemc extension
+comment = 'text search dictionary template for the Croatian language based on approximate matching through suffixes'
+default_version = '1.0'
+module_pathname = '$libdir/dict_hrstemc'
+relocatable = true
+
