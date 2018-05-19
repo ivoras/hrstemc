@@ -12,6 +12,6 @@ int main(int argc, char **argv) {
 
     char *s = strdup("drvo");
     hrstemc_istakni_slogotvorno_r(s);
-    printf("r: %s\n", s);
+    printf("r: %s %d\n", s, hrstemc_ima_samoglasnik(s));
 
 }

@@ -37,7 +37,7 @@ int hrstemc_is_stopword(char *w) {
     return 0;
 }
 
-int hrstemc_istakni_slogotvorno_r(char *s) {
+void hrstemc_istakni_slogotvorno_r(char *s) {
     int i;
     int len = strlen(s);
 
@@ -52,4 +52,21 @@ int hrstemc_istakni_slogotvorno_r(char *s) {
                 }
         }
     }
+}
+
+int hrstemc_ima_samoglasnik(char *s) {
+    char *sdup = strdup(s);
+    int len = strlen(sdup);
+    int i;
+
+    hrstemc_istakni_slogotvorno_r(sdup);
+    for (i = 0; i < len; i++) {
+        if (sdup[i] == 'a' || sdup[i] == 'e' || sdup[i] == 'i' || sdup[i] == 'o' || sdup[i] == 'u' || sdup[i] == 'R') {
+            free(sdup);
+            return 1;
+        }
+    }
+
+    free(sdup);
+    return 0;
 }
