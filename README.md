@@ -14,6 +14,8 @@ See build instructions in the `pgdict_hrstemc` folder.
 
 ## Usage example in C
 
+All strings are assumed to be UTF-8.
+
 ```C
 #include <stdio.h>
 #include <string.h>

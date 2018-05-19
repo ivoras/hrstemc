@@ -21,10 +21,12 @@ static char *stopwords[] = {
     NULL
 };
 
+// Initialises internal structures. Must be called before other hrstemc_* functions.
 void hrstemc_init() {
     hrstemc_init_rules();
 }
 
+// Tests if a word is a stop-word.
 int hrstemc_is_stopword(char *w) {
     for (char **sw = stopwords; *sw != NULL; sw++) {
         if (strcmp(w, *sw) == 0) {
@@ -34,6 +36,7 @@ int hrstemc_is_stopword(char *w) {
     return 0;
 }
 
+// Internal function. Uppercases an 'r' if it probably makes a syllable.
 void hrstemc_istakni_slogotvorno_r(char *s) {
     int i;
     int len = strlen(s);
@@ -51,6 +54,7 @@ void hrstemc_istakni_slogotvorno_r(char *s) {
     }
 }
 
+// Internal function. Tests if a function has a vowel.
 int hrstemc_ima_samoglasnik(char *s) {
     char *sdup = strdup(s);
     int len = strlen(sdup);
@@ -68,6 +72,7 @@ int hrstemc_ima_samoglasnik(char *s) {
     return 0;
 }
 
+// Internal function. Tests if a string ends with another string.
 int hrstemc_endswith(char *s, char *what) {
     if (strlen(what) > strlen(s)) {
         return 0;
@@ -78,6 +83,8 @@ int hrstemc_endswith(char *s, char *what) {
     return 0;
 }
 
+// Internal function. Does preliminary transformations of a word which normalises
+// common suffixes.
 void hrstemc_transformiraj(char **s) {
     int i;
 
@@ -91,6 +98,8 @@ void hrstemc_transformiraj(char **s) {
     }
 }
 
+// The main function of this library. Returnes a stemmed version of the given word.
+// The word must be given as a lowercase string.
 // Returns a malloc-ed string! The caller must free() it.
 char* hrstemc_korjenuj(char *s) {
     int i;
