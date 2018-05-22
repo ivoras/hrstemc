@@ -1,3 +1,4 @@
 test
 *.o
 
+pgdict_hrstemc/dict_hrstemc.so
