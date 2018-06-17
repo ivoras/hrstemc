@@ -9,3 +9,6 @@ Trying it out:
 * Create a database, and connect to it with `psql` as a superuser
 * Run `CREATE EXTENSION dict_hrstemc;` in the database. The dictionary is named `hrstemc`.
 * Use it, e.g. `SELECT ts_lexize('hrstemc', 'izvukli');`
+* Create a text search configuration: `CREATE TEXT SEARCH CONFIGURATION croatian (COPY=english);`
+* Configure it: `ALTER TEXT SEARCH CONFIGURATION croatian ALTER MAPPING FOR asciiword, asciihword, hword_asciipart, word, hword, hword_part WITH hrstemc;`
+* Try it out: `SELECT * FROM ts_debug('croatian', 'išli smo na more dobrim putem i vidjeli smo konje');`
