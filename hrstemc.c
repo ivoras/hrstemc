@@ -103,6 +103,7 @@ void hrstemc_transformiraj(char **s) {
 // Returns a malloc-ed string! The caller must free() it.
 char* hrstemc_korjenuj(char *lowercase_word) {
     int i;
+    char *s;
 
     if (lowercase_word == NULL)
         errx(1, "hrstemc_korjenuj() got a NULL argument");
@@ -110,7 +111,7 @@ char* hrstemc_korjenuj(char *lowercase_word) {
     if (hrstemc_rules[0] == NULL)
         hrstemc_init();
 
-    char *s = strdup(lowercase_word);
+    s = strdup(lowercase_word);
     hrstemc_transformiraj(&s);
 
     for (i = 0; i < hrstemc_n_rules; i++) {
@@ -126,8 +127,8 @@ char* hrstemc_korjenuj(char *lowercase_word) {
             errx(1, "PCRE error in hrstemc_korjenuj(): %d", pres);
         }
 
-        if (pres != 3) {
-            errx(1, "hrstemc_korjenuj() unexpected result: %d", pres);
+        if (pres < 3) {
+            errx(1, "hrstemc_korjenuj() PCRE unexpected result: %d for pattern %d", pres, i);
         }
 
         pcre_get_substring(s, pcre_vec, pres, 1, (const char **) &strmatch);
